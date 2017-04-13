@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load render_bundle from webpack_loader %}
 <html>
     <head>
         {% block title %}
@@ -9,9 +10,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="Demo project">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% block css %}
-        <link rel="stylesheet" href="{% static 'css/app.css' %}">
-        {% endblock %}
 
         {% block extra_header %}
         {% endblock %}
@@ -21,7 +19,7 @@
         {% endblock %}
 
         {% block js %}
-        <script src="{% static 'js/app.js' %}"></script>
+        {% render_bundle 'main' %}
         {% endblock %}
         
         {% block extra_footer %}

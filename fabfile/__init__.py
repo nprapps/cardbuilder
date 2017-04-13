@@ -68,6 +68,10 @@ def branch(branch_name):
     env.branch = branch_name
 
 @task
+def app():
+    local('npm start')
+
+@task
 def deploy_server():
     servers.checkout_latest()
     servers.restart_service('uwsgi')

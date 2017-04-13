@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<div class="wrapper">
+<div class="categories">
     {% for category, cards in grouped_cards.items %}
     <div class="category">
         <h1>{{ category }}</h1>
@@ -14,4 +14,11 @@
     </div>
     {% endfor %}
 </div>
+
+<div class="selection"></div>
+
+<div class="preview"></div>
+
+<div class="embed-code"></div>
+
 {% endblock %}
