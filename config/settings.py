@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'redactor'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,17 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REDACTOR_OPTIONS = {
+    'buttons': ['bold', 'italic', 'underline', 'lists', 'link'],
+    'lang': 'en',
+    'linkify': False,
+    'minHeight': 300,
+    'pastePlainText': True,
+    'pasteImages': False,
+    'pasteLinks': True
+}
+REDACTOR_UPLOAD = 'uploads/'
 
 ROOT_URLCONF = 'config.urls'
 
