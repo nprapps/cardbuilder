@@ -10,8 +10,12 @@ class Author(models.Model):
     def __str__(self):
         return '{0} {1}'.format(self.first_name, self.last_name)
 
+
 class Category(models.Model):
     category_name = models.CharField(max_length=40)
+
+    class Meta:
+        verbose_name_plural = 'categories'
 
     def __str__(self):
         return self.category_name
@@ -20,6 +24,7 @@ class Category(models.Model):
 class Card(models.Model):
     published = models.BooleanField(default=False)
     title = models.CharField(max_length=100)
+    subtitle = models.CharField(max_length=140, null=True, blank=True)
     body = models.TextField()
     image = models.URLField(null=True, blank=True)
     authors = models.ManyToManyField(Author)
