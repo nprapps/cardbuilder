@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        {% block title %}
+        <title>{{ PROJECT_SLUG }}</title>
+        {% endblock %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Demo project">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block css %}
+        <link rel="stylesheet" href="{% static 'css/app.css' %}">
+        {% endblock %}
+
+        {% block extra_header %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+
+        {% block js %}
+        <script src="{% static 'js/app.js' %}"></script>
+        {% endblock %}
+        
+        {% block extra_footer %}
+        {% endblock %}
+    </body>
+</html>
