@@ -152,9 +152,11 @@ class SelectionList extends Component {
     render() {
         return (
             <div class="selections">
-                {this.props.selections.map((selection) => (
-                    <p>{selection.title}</p>
-                ))}
+                <ol>
+                    {this.props.selections.map((selection) => (
+                        <li>{selection.title}</li>
+                    ))}
+                </ol>
             </div>
         )
     }

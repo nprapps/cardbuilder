@@ -4,13 +4,13 @@
   "description": "Copyright 2017 NPR.  All rights reserved.  No part of these materials may be reproduced, modified, stored in a retrieval system, or retransmitted, in any form or by any means, electronic, mechanical or otherwise, without prior written permission from NPR.",
   "dependencies": {
     "preact": "^8.1.0",
-    "preact-compat": "^3.14.3"
+    "preact-compat": "^3.14.3",
+    "react-anything-sortable": "^1.6.1"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.0",
