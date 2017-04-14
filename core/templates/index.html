@@ -1,24 +1,7 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<div class="categories">
-    {% for category, cards in grouped_cards.items %}
-    <div class="category">
-        <h1>{{ category }}</h1>
-        {% for card in cards %}
-        <div class="card">
-            <input class="card-select" type="checkbox" name="{{ card.title }}">
-            <label for="{{ card.title }}">{{ card.title }}</label>
-        </div>
-        {% endfor %}
-    </div>
-    {% endfor %}
-</div>
-
-<div class="selection"></div>
-
-<div class="preview"></div>
-
-<div class="embed-code"></div>
-
+<script type="text/javascript">
+    var DATA = {{ grouped_cards|safe }};
+</script>
 {% endblock %}

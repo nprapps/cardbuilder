@@ -48,6 +48,10 @@ module.exports = {
     
     resolve: {
         modules: ['../node_modules'],
+        alias: {
+            "react": "preact-compat",
+            "react-dom": "preact-compat"
+        },
         extensions: ['.js', '.jsx'] 
     }   
 }

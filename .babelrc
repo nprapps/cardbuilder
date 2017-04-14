@@ -1,0 +1,6 @@
+{
+    "plugins": [
+        ["transform-react-jsx", { "pragma":"h" }]
+    ],
+    "presets": ["es2017", "stage-2"]
+}
