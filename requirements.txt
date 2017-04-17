@@ -1,3 +1,4 @@
+awscli==1.11.76
 Django==1.11
 django-wysiwyg-redactor==0.5.1
 Fabric3==1.13.1.post1
