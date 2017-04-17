@@ -21,7 +21,7 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
         new BundleTracker({filename: './webpack-stats.json'}), 
     ],
-    
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {   
@@ -48,10 +48,6 @@ module.exports = {
     
     resolve: {
         modules: ['../node_modules'],
-        alias: {
-            "react": "preact-compat",
-            "react-dom": "preact-compat"
-        },
         extensions: ['.js', '.jsx'] 
     }   
 }

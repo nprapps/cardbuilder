@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Copyright 2017 NPR.  All rights reserved.  No part of these materials may be reproduced, modified, stored in a retrieval system, or retransmitted, in any form or by any means, electronic, mechanical or otherwise, without prior written permission from NPR.",
   "dependencies": {
-    "preact": "^8.1.0",
-    "preact-compat": "^3.14.3",
-    "react-anything-sortable": "^1.6.1"
+    "react": "^15.5.4",
+    "react-anything-sortable": "^1.6.1",
+    "react-dom": "^15.5.4",
+    "react-sortable-hoc": "^0.6.2"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
