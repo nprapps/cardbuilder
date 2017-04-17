@@ -189,10 +189,11 @@ class Embed extends React.Component {
     render() {
         return (
             <div className="embed">
-                { 
-                    this.props.selections.length > 0 ? 
-                    <p>{`https://apps.npr.org/dailygraphics/graphic/card-embed/child.html/?ids=${this.props.ids}`}</p>
-                    : null
+                {
+                    this.props.selections.length > 0 ?
+                    <iframe 
+                        src={`https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html?ids=${this.props.ids}`}
+                    /> : null
                 }
             </div>
         )
