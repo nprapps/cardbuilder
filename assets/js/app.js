@@ -186,16 +186,17 @@ class Embed extends React.Component {
         super(props)
     }
 
-    render() {
+    componentDidUpdate() {
+        new pym.Parent(
+            'card-embed', 
+            `https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html?ids=${this.props.ids}`, 
+            {}
+        )
+    }
+
+    render() {        
         return (
-            <div className="embed">
-                {
-                    this.props.selections.length > 0 ?
-                    <iframe 
-                        src={`https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html?ids=${this.props.ids}`}
-                    /> : null
-                }
-            </div>
+            <div id="card-embed"></div>
         )
     }
 
