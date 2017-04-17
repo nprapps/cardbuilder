@@ -15,7 +15,7 @@ def index(request):
     categories = Category.objects.all()
 
     for category in categories:
-        cards = Card.objects.filter(category=category)
+        cards = Card.objects.filter(category=category).filter(published=True)
         cards_list = []
         for card in cards:
             card_obj = {}
