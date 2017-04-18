@@ -5,6 +5,7 @@ import '../less/app.less'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+import sortBy from 'lodash/sortBy';
 
 let SELECTIONS = [];
 
@@ -113,11 +114,17 @@ class CardList extends React.Component {
         this.props.update(card, action)
     }
 
+    sortCards() {
+        return sortBy(this.props.cards, function(c) {
+            return c.title
+        })
+    }
+
     render() {
         return(
             <div className="category">
                 <h2>{this.props.category}</h2>
-                {this.props.cards.map((card) => (
+                {this.sortCards().map((card) => (
                     <Card update={this.updateCard} key={card.id} card={card} />
                 ))}
             </div>
