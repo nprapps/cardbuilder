@@ -68,6 +68,7 @@ class App extends React.Component {
                 <SelectionList selections={this.state.selections} update={this.updateOrder} key="SelectionList" />
                 
                 { this.state.selections.length > 0 ? <Embed selections={this.state.selections} ids={this.state.ids} key="Embed" /> : null }
+                { this.state.selections.length > 0 ? <EmbedCode ids={this.state.ids} key="EmbedCode" /> : null }
             </div>
         )
     }
@@ -232,6 +233,67 @@ class Embed extends React.Component {
                 </div>
                 <div className="row-interaction">
                     <div id="card-embed"></div>
+                </div>
+            </div>
+        )
+    }
+}
+
+class EmbedCode extends React.Component {
+    constructor(props) {
+        super(props)
+
+    }
+
+    embedCode() {
+        return `<div id="responsive-embed-russia-cards"></div>
+<script type=text/javascript>
+    (function(jQuery) {
+        if (typeof jQuery !== 'undefined' && typeof jQuery.getScript === 'function') {
+            var getParameterByName = function(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+            // add randomness to id to support for multiple graphic instances in one story
+            var el = document.getElementById("responsive-embed-russia-cards");
+            el.id = el.id + "-" + Math.random().toString(36).substr(2,5);
+            jQuery.getScript("https://pym.nprapps.org/pym.v1.min.js").done(function () {
+                jQuery(function () { // Wait for page load
+                    var pymParent = new pym.Parent(
+                        el.id,
+                        'https://apps.npr.org/dailygraphics/graphics/russia-cards/child.html/?ids=${this.props.ids}',
+                        {}
+                    );
+                    jQuery.getScript("https://carebot.nprapps.org/carebot-tracker.v0.min.js").done(function () {
+                        var tracker = new CarebotTracker.VisibilityTracker(el.id, function(result) {
+                            // Ignore Carebot events to empty embeds, keeps listening after unloading the page
+                            if (pymParent.el.getElementsByTagName('iframe').length !== 0) {
+                                pymParent.sendMessage('on-screen', result.bucket);
+                            }
+                        });
+                    });
+
+                });
+            });
+        } else {
+            console.error('could not load graphic: jQuery is not on the page.');
+        }
+    })(window.jQuery);
+</script>`
+    }
+
+    render() {
+        return (
+            <div className="row embed-code-wrapper">
+                <div className="row-label">
+                    <h1>4. Copy the embed code</h1>
+                </div>
+                <div className="row-interaction">
+                    <pre>
+                        {this.embedCode()}
+                    </pre>
                 </div>
             </div>
         )
