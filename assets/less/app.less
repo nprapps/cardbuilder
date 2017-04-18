@@ -1,19 +1,122 @@
+@neutral-form-color: papayawhip;
+@active-form-color: #d5e5ff;
+
 body {
     font-family: sans-serif;
-    max-width: 1024px;
     margin: 0 auto;
+    max-width: 1280px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid black;
+
+    &:last-child {
+        border: none;
+    }
+}
+
+.row-label {
+    width: 33%;
+}
+
+.row-interaction {
+    width: 67%;
 }
 
 .categories {
     display: flex;
 }
+
 .category {
-    background: lightgrey;
-    border: solid black 1px;
+    
+    // background: papayawhip;
     width: 33%;
+    padding: 0 10px 10px;
+
+    &:last-child {
+        border: none;
+    }
+
+    h2 { text-align: center; }
+
+    label {
+        display: inline;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 14px;
+        color: #99a1a7;
+
+
+        a {
+            position: absolute;
+            right: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: @active-form-color;
+        }
+    }
+
+    input {
+        display: none;
+    }
+
+    input + label {
+        background-color: @neutral-form-color;
+        padding: 9px;
+        border-radius: 3px;
+        display: inline-block;
+        position: relative;
+    }
+
+    input:checked + label {
+        background-color: @active-form-color;
+        color: black;
+    }
 }
 
-h1 { text-align: center; }
+.selection-list {
+    // background-color: papayawhip;
+    ol { 
+        list-style-position: inside; 
+        padding-left: 10px;
+    }
+}
+
+.selection-list li, .sorting {
+    background-color: @active-form-color;
+    color: black;
+    padding: 9px;
+    border-radius: 3px;
+    position: relative;
+    margin-bottom: 10px;
+    width: 50%;
+    text-align: center;
+
+    &:hover {
+        cursor: move; /* fallback if grab cursor is unsupported */
+        cursor: grab;
+        cursor: -moz-grab;
+        cursor: -webkit-grab;
+    }
+
+    &:active { 
+        cursor: grabbing;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+    }
+}
+
+.sorting {
+    list-style-type: none !important;
+}
 
 iframe {
     width: 100%;
