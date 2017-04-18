@@ -18,9 +18,14 @@ nav {
     height: 35px;
     background-color: black;
 
-    padding-left: 50px;
-    display: flex;
-    align-items: center;
+    .container {
+        display: flex;
+        align-items: center;
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        height: 35px;
+    }
     img {
         max-width: 50px;
         height: auto;
@@ -30,8 +35,10 @@ nav {
     span {
         color: white;
         text-transform: uppercase;
-        vertical-align: top;
+        vertical-align: middle;
         font-weight: bold;
+        position: relative;
+        top: -1px;
     }
 }
 
