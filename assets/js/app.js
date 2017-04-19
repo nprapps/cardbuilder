@@ -92,7 +92,6 @@ class Title extends React.Component {
     }
 
     update(e) {
-        console.log(e.target.value)
         const newTitle = e.target.value
         this.setState({ value: newTitle })
         this.props.update(newTitle)
