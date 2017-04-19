@@ -13,8 +13,13 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selections: []
+            selections: [],
+            title: ''
         }
+    }
+
+    updateTitle = (title) => {
+        this.setState({ title: title })
     }
 
     updateSelections = (selection, action) => {
@@ -42,7 +47,6 @@ class App extends React.Component {
             selections: selections,
             ids: joinedids
         })
-
     }
 
     joinIDs = (selections) => {
@@ -65,11 +69,45 @@ class App extends React.Component {
     render() {
         return(
             <div>
+                <Title update={this.updateTitle} key="Title"></Title>
                 <Categories update={this.updateSelections} key="Categories" />
                 <SelectionList selections={this.state.selections} update={this.updateOrder} key="SelectionList" />
                 
-                { this.state.selections.length > 0 ? <Embed selections={this.state.selections} ids={this.state.ids} key="Embed" /> : null }
-                { this.state.selections.length > 0 ? <EmbedCode ids={this.state.ids} key="EmbedCode" /> : null }
+                { this.state.selections.length > 0 ? <Embed ids={this.state.ids} title={this.state.title} key="Embed" /> : null }
+                { this.state.selections.length > 0 ? <EmbedCode ids={this.state.ids} title={this.state.title} key="EmbedCode" /> : null }
+            </div>
+        )
+    }
+}
+
+class Title extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            'value': ''
+        }
+
+        this.update = this.update.bind(this)
+    }
+
+    update(e) {
+        console.log(e.target.value)
+        const newTitle = e.target.value
+        this.setState({ value: newTitle })
+        this.props.update(newTitle)
+    }
+
+    render() {
+        return(
+            <div className="row title-wrapper">
+                <div className="row-label">
+                    <h1>1. Title your stack</h1>
+                </div>
+                <div className="title row-interaction">
+                    <label htmlFor="title">Title: </label>
+                    <input type="text" name="title" value={this.state.value} onChange={this.update} />
+                </div>
             </div>
         )
     }
@@ -88,7 +126,7 @@ class Categories extends React.Component {
         return(
             <div className="row categories-wrapper">
                 <div className="row-label">
-                    <h1>1. Select your cards</h1>
+                    <h1>2. Select your cards</h1>
                 </div>
                 <div className="categories row-interaction">
                     {Object.keys(DATA).map(key => (
@@ -180,7 +218,7 @@ class SelectionList extends React.Component {
         return (
             <div className="row selection-wrapper">
                 <div className="row-label">
-                    <h1>2. Order your cards</h1>
+                    <h1>3. Order your cards</h1>
                 </div>
                 <div className="row-interaction selection-list">
                     <SortableList selections={this.props.selections} onSortEnd={this.onSortEnd} lockAxis="y" helperClass="sorting"/>
@@ -227,7 +265,7 @@ class Embed extends React.Component {
     initEmbed() {
         new pym.Parent(
             'card-embed', 
-            `https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html?ids=${this.props.ids}`, 
+            `https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html?ids=${this.props.ids}&title=${this.props.title}`, 
             {}
         )
     }
@@ -236,7 +274,7 @@ class Embed extends React.Component {
         return (
             <div className="row embed-wrapper">
                 <div className="row-label">
-                    <h1>3. Preview your embed</h1>
+                    <h1>4. Preview your embed</h1>
                 </div>
                 <div className="row-interaction">
                     <div id="card-embed"></div>
@@ -270,7 +308,7 @@ class EmbedCode extends React.Component {
                 jQuery(function () { // Wait for page load
                     var pymParent = new pym.Parent(
                         el.id,
-                        'https://apps.npr.org/dailygraphics/graphics/russia-cards/child.html/?ids=${this.props.ids}',
+                        'https://apps.npr.org/dailygraphics/graphics/russia-cards/child.html/?ids=${this.props.ids}&title=${this.props.title}',
                         {}
                     );
                     jQuery.getScript("https://carebot.nprapps.org/carebot-tracker.v0.min.js").done(function () {
@@ -295,7 +333,7 @@ class EmbedCode extends React.Component {
         return (
             <div className="row embed-code-wrapper">
                 <div className="row-label">
-                    <h1>4. Copy the embed code</h1>
+                    <h1>5. Copy the embed code</h1>
                 </div>
                 <div className="row-interaction">
                     <pre>
