@@ -73,8 +73,8 @@ class App extends React.Component {
                 <Categories update={this.updateSelections} key="Categories" />
                 <SelectionList selections={this.state.selections} update={this.updateOrder} key="SelectionList" />
                 
-                { this.state.selections.length > 0 ? <Embed ids={this.state.ids} title={this.state.title} key="Embed" /> : null }
-                { this.state.selections.length > 0 ? <EmbedCode ids={this.state.ids} title={this.state.title} key="EmbedCode" /> : null }
+                { this.state.selections.length > 0 && this.state.title.length > 0 ? <Embed ids={this.state.ids} title={this.state.title} key="Embed" /> : null }
+                { this.state.selections.length > 0 && this.state.title.length > 0 ? <EmbedCode ids={this.state.ids} title={this.state.title} key="EmbedCode" /> : null }
             </div>
         )
     }
@@ -104,8 +104,7 @@ class Title extends React.Component {
                     <h1>1. Title your stack</h1>
                 </div>
                 <div className="title row-interaction">
-                    <label htmlFor="title">Title: </label>
-                    <input type="text" name="title" value={this.state.value} onChange={this.update} />
+                    <input type="text" name="title" value={this.state.value} onChange={this.update} placeholder="Enter your title" />
                 </div>
             </div>
         )
