@@ -36,7 +36,7 @@ STAGING_S3_BUCKET = 'stage-apps.npr.org'
 
 DEFAULT_MAX_AGE = 20
 
-PRODUCTION_SERVERS = ['cron.nprapps.org']
+PRODUCTION_SERVERS = ['54.211.90.44']
 STAGING_SERVERS = ['54.210.206.115']
 
 # Should code be deployed to the web/cron servers?
