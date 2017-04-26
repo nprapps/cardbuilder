@@ -150,4 +150,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '~/apps/{0}/static/'.format(app_config.PROJECT_FILENAME)
+STATIC_ROOT = '/home/{0}/apps/{1}/static/'.format(app_config.SERVER_USER, app_config.PROJECT_FILENAME)
