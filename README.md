@@ -57,6 +57,7 @@ Bootstrap the project
 cd cardbuilder
 mkvirtualenv -p `which python3` cardbuilder
 pip install -r requirements.txt
+npm install
 fab django.setup_django
 ```
 
@@ -76,7 +77,7 @@ A flask app is used to run the project locally. It will automatically recompile 
 
 ```
 workon $PROJECT_SLUG
-python manage.py runserver
+fab app
 ```
 
 Visit [localhost:8000](http://localhost:8000) in your browser.
