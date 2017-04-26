@@ -72,8 +72,9 @@ def app():
     local('npm start')
 
 @task
-def deploy_server():
+def deploy_server(compile=False):
     servers.checkout_latest()
     servers.restart_service('uwsgi')
-    run('cd {0}; npm run build'.format(app_config.SERVER_REPOSITORY_PATH))
-    servers.fabcast('django.collect_static')
+
+    if compile:
+        servers.compile_webpack()
