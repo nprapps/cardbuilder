@@ -5,21 +5,21 @@ var BundleTracker = require('webpack-bundle-tracker')
 
 module.exports = {
     context: __dirname,
-    entry: [
-        'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/only-dev-server',
-        '../assets/js/app',
-    ],
+    entry: '../assets/js/app',
     output: {
         path: path.resolve('../assets/bundles/'), 
         filename: '[name]-[hash].js', 
-        publicPath: 'http://localhost:3000/assets/bundles/'
     },
     
     plugins: [
     ],
     module: {
         rules: [
+            {   
+                test: /\.jsx?$/, 
+                exclude: /node_modules/, 
+                loader: 'babel-loader', 
+            },
             {
                 test: /\.less$/,
                 use: [{

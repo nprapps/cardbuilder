@@ -1,13 +1,8 @@
-// styles
-import '../less/app.less'
-
-// modules
+import '../less/app.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import sortBy from 'lodash/sortBy';
-
-let SELECTIONS = [];
 
 class App extends React.Component {
     constructor(props) {
