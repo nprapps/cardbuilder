@@ -113,7 +113,7 @@ def generate_secret_key():
 
     export = 'export {0}_DJANGO_SECRET_KEY="{1}"'.format(app_config.PROJECT_FILENAME, secret_key)
 
-    sudo('cat {0} >> /etc/environment'.format(export))
+    sudo('cat \'{0}\' >> /etc/environment'.format(export))
 
 
 @task
