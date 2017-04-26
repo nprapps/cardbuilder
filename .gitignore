@@ -1,6 +1,6 @@
 __pycache__
 node_modules
-webpack-stats.json
+webpack-stats*
 assets/bundles/*
 data/*.json
 confs/rendered
