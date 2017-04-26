@@ -1,6 +1,6 @@
 import app_config
 
-from fabric.api import local, settings, task
+from fabric.api import local, run, settings, task
 from fabric.state import env
 
 # Other fabfiles
@@ -75,3 +75,5 @@ def app():
 def deploy_server():
     servers.checkout_latest()
     servers.restart_service('uwsgi')
+    run('cd {0}; npm run build'.format(app_config.SERVER_REPOSITORY_PATH))
+    servers.fabcast('django.collect_static')
