@@ -4,12 +4,11 @@ import os
 import subprocess
 
 from django.core import serializers
-from django.db.models.signals import post_save, m2m_changed, post_delete
+from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import Card, Author, Category
+from .models import Card, Category
 
 @receiver(post_save, sender=Card)
-@receiver(m2m_changed, sender=Card.authors.through)
 def publish_json(sender, instance, **kwargs):
     if not instance.published:
         return

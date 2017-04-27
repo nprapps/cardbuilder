@@ -1,4 +1,4 @@
-from .models import Author, Card, Category
+from .models import Card, Category
 from django import forms
 from django.contrib import admin
 from django.utils.html import escape
@@ -13,7 +13,7 @@ class AuthorAdmin(admin.ModelAdmin):
 class CardAdminForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ['published', 'authors', 'title', 'subtitle', 'image', 'category', 'body']
+        fields = ['published', 'copyedited', 'title', 'subtitle', 'image', 'image_credit', 'category', 'body', 'production_notes']
         widgets = {
             'body': RedactorEditor()
         }
@@ -21,12 +21,7 @@ class CardAdminForm(forms.ModelForm):
 class CardAdmin(admin.ModelAdmin):
     form = CardAdminForm
 
-    list_display = ('title', 'get_authors', 'category', 'published')
-
-    def get_authors(self, obj):
-        return ", ".join(['{0} {1}'.format(a.first_name, a.last_name) for a in obj.authors.all()])
-    get_authors.short_description = 'Authors'
+    list_display = ('title', 'category', 'copyedited', 'published')
 
 admin.site.register(Card, CardAdmin)
-admin.site.register(Author, AuthorAdmin)
 admin.site.register(Category, CategoryAdmin)
