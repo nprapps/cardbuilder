@@ -10,7 +10,7 @@ from .models import Card, Category
 
 @receiver(post_save, sender=Card)
 def publish_json(sender, instance, **kwargs):
-    if not instance.published:
+    if not instance.published or not instance.copyedited:
         return
 
     DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
@@ -27,16 +27,7 @@ def publish_json(sender, instance, **kwargs):
 
     json_instance = json_serializer.serialize([instance])
     dict_instance = json.loads(json_instance)
-
     fields = dict_instance[0]['fields']
-
-    author_instances = []
-    for author in fields['authors']:
-        author_obj = Author.objects.get(pk=author)
-        author_json = json_serializer.serialize([author_obj])
-        author_dict = json.loads(author_json)
-        author_instances.append(author_dict[0]['fields'])
-    fields['authors'] = author_instances
 
     category_obj = Category.objects.get(pk=fields['category'])
     category_json = json_serializer.serialize([category_obj])
