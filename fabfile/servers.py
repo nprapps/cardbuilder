@@ -119,7 +119,7 @@ def generate_secret_key():
 @task
 def compile_webpack():
     run('cd {0}; npm run build'.format(app_config.SERVER_REPOSITORY_PATH))
-    servers.fabcast('django.collect_static')
+    fabcast('django.collect_static')
 
 @task
 def install_crontab():

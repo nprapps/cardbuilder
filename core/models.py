@@ -16,6 +16,7 @@ class Card(models.Model):
     copyedited = models.BooleanField(default=False)
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=140, null=True, blank=True)
+    lede = models.CharField(max_length=140, null=True)
     body = models.TextField()
     image = models.URLField(null=True, blank=True)
     image_credit = models.CharField(max_length=140, null=True, blank=True)

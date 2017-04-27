@@ -13,7 +13,7 @@ class AuthorAdmin(admin.ModelAdmin):
 class CardAdminForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ['published', 'copyedited', 'title', 'subtitle', 'image', 'image_credit', 'category', 'body', 'production_notes']
+        fields = ['published', 'copyedited', 'title', 'subtitle', 'lede', 'image', 'image_credit', 'category', 'body', 'production_notes']
         widgets = {
             'body': RedactorEditor()
         }
