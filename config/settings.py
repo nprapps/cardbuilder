@@ -73,7 +73,7 @@ MIDDLEWARE = [
 ]
 
 REDACTOR_OPTIONS = {
-    'buttons': ['bold', 'italic', 'underline', 'lists', 'link'],
+    'buttons': ['bold', 'italic', 'underline', 'link'],
     'lang': 'en',
     'linkify': False,
     'minHeight': 300,
