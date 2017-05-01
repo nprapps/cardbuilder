@@ -161,13 +161,12 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 
-if DEBUG:
+if app_config.DEPLOYMENT_TARGET != 'production':
     AWS_DEFAULT_ACL = 'private'
     AWS_STORAGE_BUCKET_NAME = 'stage-apps.npr.org'
     AWS_S3_CUSTOM_DOMAIN = 's3.amazonaws.com/{0}'.format(
         AWS_STORAGE_BUCKET_NAME, 
     )
-
 else:
     AWS_STORAGE_BUCKET_NAME = 'apps.npr.org'
     AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME
