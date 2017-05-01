@@ -18,7 +18,7 @@ class Card(models.Model):
     subtitle = models.CharField(max_length=140, null=True, blank=True)
     lede = models.CharField(max_length=140, null=True)
     body = models.TextField()
-    image = models.URLField(null=True, blank=True)
+    image = models.ImageField(null=True, upload_to='img/')
     image_credit = models.CharField(max_length=140, null=True, blank=True)
     production_notes = models.TextField(null=True)
     category = models.ForeignKey(Category)
