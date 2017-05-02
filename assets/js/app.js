@@ -9,12 +9,17 @@ class App extends React.Component {
         super(props)
         this.state = {
             selections: [],
-            title: ''
+            title: '',
+            subtitle: ''
         }
     }
 
     updateTitle = (title) => {
         this.setState({ title: title })
+    }
+
+    updateSubtitle = (subtitle) => {
+        this.setState({ subtitle: subtitle })
     }
 
     updateSelections = (selection, action) => {
@@ -65,11 +70,12 @@ class App extends React.Component {
         return(
             <div>
                 <Title update={this.updateTitle} key="Title"></Title>
+                <Subtitle update={this.updateSubtitle} key="Subtitle"></Subtitle>
                 <Categories update={this.updateSelections} key="Categories" />
                 <SelectionList selections={this.state.selections} update={this.updateOrder} key="SelectionList" />
                 
-                { this.state.selections.length > 0 && this.state.title.length > 0 ? <Embed ids={this.state.ids} title={this.state.title} key="Embed" /> : null }
-                { this.state.selections.length > 0 && this.state.title.length > 0 ? <EmbedCode ids={this.state.ids} title={this.state.title} key="EmbedCode" /> : null }
+                { this.state.selections.length > 0 && this.state.title.length > 0 && this.state.subtitle.length > 0 ? <Embed ids={this.state.ids} title={this.state.title} subtitle={this.state.subtitle} key="Embed" /> : null }
+                { this.state.selections.length > 0 && this.state.title.length > 0 && this.state.subtitle.length > 0 ? <EmbedCode ids={this.state.ids} title={this.state.title} subtitle={this.state.subtitle} key="EmbedCode" /> : null }
             </div>
         )
     }
@@ -106,6 +112,37 @@ class Title extends React.Component {
     }
 }
 
+class Subtitle extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            'value': ''
+        }
+
+        this.update = this.update.bind(this)
+    }
+
+    update(e) {
+        const newSubtitle = e.target.value
+        this.setState({ value: newSubtitle })
+        this.props.update(newSubtitle)
+    }
+
+    render() {
+        return(
+            <div className="row subtitle-wrapper">
+                <div className="row-label">
+                    <h1>2. Subtitle your stack</h1>
+                </div>
+                <div className="subtitle row-interaction">
+                    <input type="text" name="subtitle" value={this.state.value} onChange={this.update} placeholder="Enter your subtitle" />
+                </div>
+            </div>
+        )
+    }
+}
+
 class Categories extends React.Component {
     constructor(props) {
         super(props)
@@ -119,7 +156,7 @@ class Categories extends React.Component {
         return(
             <div className="row categories-wrapper">
                 <div className="row-label">
-                    <h1>2. Select your cards</h1>
+                    <h1>3. Select your cards</h1>
                 </div>
                 <div className="categories row-interaction">
                     {Object.keys(DATA).map(key => (
@@ -211,7 +248,7 @@ class SelectionList extends React.Component {
         return (
             <div className="row selection-wrapper">
                 <div className="row-label">
-                    <h1>3. Order your cards</h1>
+                    <h1>4. Order your cards</h1>
                 </div>
                 <div className="row-interaction selection-list">
                     <SortableList selections={this.props.selections} onSortEnd={this.onSortEnd} lockAxis="y" helperClass="sorting"/>
@@ -258,7 +295,7 @@ class Embed extends React.Component {
     initEmbed() {
         new pym.Parent(
             'card-embed', 
-            `https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html?ids=${this.props.ids}&title=${this.props.title}`, 
+            `https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html?ids=${this.props.ids}&title=${this.props.title}&subtitle=${this.props.subtitle}`, 
             {}
         )
     }
@@ -267,7 +304,7 @@ class Embed extends React.Component {
         return (
             <div className="row embed-wrapper">
                 <div className="row-label">
-                    <h1>4. Preview your embed</h1>
+                    <h1>5. Preview your embed</h1>
                 </div>
                 <div className="row-interaction">
                     <div id="card-embed"></div>
@@ -301,7 +338,7 @@ class EmbedCode extends React.Component {
                 jQuery(function () { // Wait for page load
                     var pymParent = new pym.Parent(
                         el.id,
-                        'https://apps.npr.org/dailygraphics/graphics/russia-cards/child.html/?ids=${this.props.ids}&title=${this.props.title}',
+                        'https://apps.npr.org/dailygraphics/graphics/russia-cards/child.html/?ids=${this.props.ids}&title=${this.props.title}&subtitle=${this.props.subtitle}',
                         {}
                     );
                     jQuery.getScript("https://carebot.nprapps.org/carebot-tracker.v0.min.js").done(function () {
@@ -326,7 +363,7 @@ class EmbedCode extends React.Component {
         return (
             <div className="row embed-code-wrapper">
                 <div className="row-label">
-                    <h1>5. Copy the embed code</h1>
+                    <h1>6. Copy the embed code</h1>
                 </div>
                 <div className="row-interaction">
                     <pre>
