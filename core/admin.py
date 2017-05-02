@@ -18,6 +18,16 @@ class CardAdminForm(forms.ModelForm):
             'body': RedactorEditor()
         }
 
+    def clean(self):
+        cleaned_data = super(CardAdminForm, self).clean()
+        image = cleaned_data.get('image')
+        image_credit = cleaned_data.get('image_credit')
+
+        if image and not image_credit:
+            raise forms.ValidationError(
+                "Cards with images must include an image credit."
+            )
+
 class CardAdmin(admin.ModelAdmin):
     form = CardAdminForm
 
