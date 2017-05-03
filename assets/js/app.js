@@ -295,7 +295,7 @@ class Embed extends React.Component {
     initEmbed() {
         new pym.Parent(
             'card-embed', 
-            `https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html?ids=${this.props.ids}&title=${this.props.title}&subtitle=${this.props.subtitle}`, 
+            `https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}`, 
             {}
         )
     }
@@ -338,7 +338,7 @@ class EmbedCode extends React.Component {
                 jQuery(function () { // Wait for page load
                     var pymParent = new pym.Parent(
                         el.id,
-                        'https://apps.npr.org/dailygraphics/graphics/russia-cards/child.html/?ids=${this.props.ids}&title=${this.props.title}&subtitle=${this.props.subtitle}',
+                        'https://apps.npr.org/dailygraphics/graphics/russia-cards/child.html/?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}',
                         {}
                     );
                     jQuery.getScript("https://carebot.nprapps.org/carebot-tracker.v0.min.js").done(function () {
