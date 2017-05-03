@@ -338,7 +338,7 @@ class EmbedCode extends React.Component {
                 jQuery(function () { // Wait for page load
                     var pymParent = new pym.Parent(
                         el.id,
-                        'https://apps.npr.org/dailygraphics/graphics/russia-cards/child.html/?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}',
+                        'https://apps.npr.org/dailygraphics/graphics/russia-cards/child.html?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}',
                         {}
                     );
                     jQuery.getScript("https://carebot.nprapps.org/carebot-tracker.v0.min.js").done(function () {
