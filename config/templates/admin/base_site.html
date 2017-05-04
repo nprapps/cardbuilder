@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Cardbuilder</a></h1>
+{% endblock %}
+
+{% block extrahead %}
+<style>
+    #id_title, #id_subtitle, #id_lede {
+        width: 40em;
+    }
+
+    .redactor-box {
+        width: 75% !important;
+    }
+
+    .redactor-styles p {
+        font-size: 16px !important;
+    }
+</style>
+{% endblock %}
