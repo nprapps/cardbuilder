@@ -138,7 +138,7 @@ class Subtitle extends React.Component {
                     <h1>2. Subtitle your stack</h1>
                 </div>
                 <div className="subtitle row-interaction">
-                    <input type="text" name="subtitle" value={this.state.value} onChange={this.update} placeholder="Enter your subtitle" />
+                    <textarea value={this.state.value} onChange={this.update} placeholder="Enter your subtitle" />
                 </div>
             </div>
         )
