@@ -12,6 +12,8 @@ if (DEPLOYMENT_TARGET === 'production') {
     BASE_GRAPHIC_URL = 'https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html'
 }
 
+console.log(DEPLOYMENT_TARGET, BASE_GRAPHIC_URL)
+
 class App extends React.Component {
     constructor(props) {
         super(props)
