@@ -333,12 +333,6 @@ class EmbedCode extends React.Component {
 <script type=text/javascript>
     (function(jQuery) {
         if (typeof jQuery !== 'undefined' && typeof jQuery.getScript === 'function') {
-            var getParameterByName = function(name) {
-                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                    results = regex.exec(location.search);
-                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-            }
             // add randomness to id to support for multiple graphic instances in one story
             var el = document.getElementById("responsive-embed-russia-cards");
             el.id = el.id + "-" + Math.random().toString(36).substr(2,5);
