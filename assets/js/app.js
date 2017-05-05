@@ -4,7 +4,13 @@ import ReactDOM from 'react-dom';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import sortBy from 'lodash/sortBy';
 
-const BASE_GRAPHIC_URL = 'https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html'
+let BASE_GRAPHIC_URL = null;
+
+if (DEPLOYMENT_TARGET === 'production') {
+    BASE_GRAPHIC_URL = 'https://apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html'
+} else {
+    BASE_GRAPHIC_URL = 'https://s3.amazonaws.com/stage-apps.npr.org/dailygraphics/graphics/trump-card-wireframe-20170410/child.html'
+}
 
 class App extends React.Component {
     constructor(props) {
