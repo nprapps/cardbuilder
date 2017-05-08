@@ -368,9 +368,9 @@ class EmbedCode extends React.Component {
                     <h1>6. Copy the embed code</h1>
                 </div>
                 <div className="row-interaction">
-                    <pre>
+                    <textarea readOnly rows="20" cols="80">
                         {this.embedCode()}
-                    </pre>
+                    </textarea>
                 </div>
             </div>
         )
