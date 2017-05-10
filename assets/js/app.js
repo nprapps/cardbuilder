@@ -325,10 +325,10 @@ class Embed extends React.Component {
 class EmbedCode extends React.Component {
     constructor(props) {
         super(props)
-
     }
 
     embedCode() {
+        console.log(this.props.ids);
         return `<div id="responsive-embed-russia-cards"></div>
 <script type=text/javascript>
     (function(jQuery) {
@@ -368,8 +368,7 @@ class EmbedCode extends React.Component {
                     <h1>6. Copy the embed code</h1>
                 </div>
                 <div className="row-interaction">
-                    <textarea readOnly rows="20" cols="80">
-                        {this.embedCode()}
+                    <textarea readOnly rows="20" cols="80" value={this.embedCode()}>
                     </textarea>
                 </div>
             </div>
