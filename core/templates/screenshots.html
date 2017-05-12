@@ -34,13 +34,21 @@
                  timeout: 10000
             });
         </script>
+        <style>
+            .card {
+                width: 50%;
+                float: left;
+            }
+        </style>
 
         {% block extra_header %}
         {% endblock %}
     </head>
     <body>
     {% for card in cards %}
-        <img src="https://apps.npr.org/cardbuilder/screenshots/russian-explainer-{{ card.title|slugify }}-id-{{ card.id }}.png">
+        <div class="card">
+            <img src="https://apps.npr.org/cardbuilder/screenshots/russian-explainer-{{ card.title|slugify }}-id-{{ card.id }}.png">
+        </div>
     {% endfor %}
 
     </body>
