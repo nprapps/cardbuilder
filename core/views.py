@@ -30,7 +30,7 @@ def index(request):
 
 def screenshots(request):
     context = build_context()
-    cards = Card.objects.filter(published=True).filter(copyedited=True)
+    cards = Card.objects.filter(published=True).filter(copyedited=True).order_by('id')
     context['cards'] = cards
 
     return render(request, 'screenshots.html', context)
