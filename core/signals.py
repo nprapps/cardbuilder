@@ -1,12 +1,14 @@
 import app_config
 import json
 import os
+import requests
 import subprocess
 
 from django.core import serializers
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Card, Category
+from slugify import slugify
 
 @receiver(post_save, sender=Card)
 def publish_json(sender, instance, **kwargs):
@@ -54,3 +56,17 @@ def publish_json(sender, instance, **kwargs):
         s3_args.extend(['--acl', 'public-read'])
 
     subprocess.run(s3_args)
+
+@receiver(post_save, sender=Card)
+def screenshot(sender, instance, **kwargs):
+    if not instance.published or not instance.copyedited:
+        return
+
+    LAMBDA_URL = 'https://zy98z1okb0.execute-api.us-east-1.amazonaws.com/dev/chrome'
+
+    payload = {
+        'id': instance.id,
+        'slug': slugify(instance.title)
+    }
+
+    r = requests.get(LAMBDA_URL, params=payload)
