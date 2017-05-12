@@ -28,6 +28,13 @@ def index(request):
 
     return render(request, 'index.html', context)
 
+def screenshots(request):
+    context = build_context()
+    cards = Card.objects.filter(published=True).filter(copyedited=True)
+    context['cards'] = cards
+
+    return render(request, 'screenshots.html', context)
+
 
 def build_context():
     config = {}
