@@ -22,25 +22,6 @@ What is this?
 
 Cardbuilder is a Django-based application for authoring cards and creating embeddable stacks related to the Russia investigation for use on npr.org. 
 
-What's In Here?
----------------
-
-- `assets`: Front-end assets for the Django views. These are compiled through Webpack.
-- `config`: Django project configuration
-- `confs`: Server configuration files (nginx, uwsgi, etc)
-- `core`: Django application
-- `data`: Stub folder for output of JSON for cards locally
-- `fabfile`: Fabric commands for server management
-- `webpack`: Webpack configuration
-- `.babelrc`: Configuration for Babel transpilation, used by Webpack
-- `app_config.py`: General application configuration
-- `crontab`: Default crontab, not in use for this app
-- `manage.py`: Default Django management file
-- `package.json`: Node requirements
-- `README.md`: General documentation
-- `requirements.txt`: Python requirements
-- `run_on_server.sh`: Bash file used to run Fabric commands on the server, invoked by `fab servers.fabcast`.
-
 Assumptions
 -----------
 
@@ -59,15 +40,21 @@ What's in here?
 
 The project contains the following folders and important files:
 
-* ``config`` -- The default Django project
-* ``confs`` -- Server configuration files for nginx and uwsgi. Edit the templates then ``fab <ENV> servers.render_confs``, don't edit anything in ``confs/rendered`` directly.
-* ``core`` -- The default Django app
-* ``fabfile`` -- [Fabric](http://docs.fabfile.org/en/latest/) commands for automating setup, deployment, data processing, etc.
-* ``app_config.py`` -- Global project configuration for scripts, deployment, etc.
-* ``crontab`` -- Cron jobs to be installed as part of the project.
-* ``manage.py`` -- Default Django management command file.
-* ``requirements.txt`` -- Python requirements.
-* ``run_on_server.sh`` -- Shell script used on the server to invoke environment variables before running commands.
+- `assets`: Front-end assets for the Django views. These are compiled through Webpack.
+- `config`: Django project configuration
+- `confs`: Server configuration files (nginx, uwsgi, etc)
+- `core`: Django application
+- `data`: Stub folder for output of JSON for cards locally
+- `fabfile`: Fabric commands for server management
+- `webpack`: Webpack configuration
+- `.babelrc`: Configuration for Babel transpilation, used by Webpack
+- `app_config.py`: General application configuration
+- `crontab`: Default crontab, not in use for this app
+- `manage.py`: Default Django management file
+- `package.json`: Node requirements
+- `README.md`: General documentation
+- `requirements.txt`: Python requirements
+- `run_on_server.sh`: Bash file used to run Fabric commands on the server, invoked by `fab servers.fabcast`.
 
 Bootstrap the project
 ---------------------
