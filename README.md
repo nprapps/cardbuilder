@@ -132,7 +132,12 @@ Models
 The core app only has two models:
 
 - **Category**: A grouping for cards, i.e. People, Documents, etc.
-- **Card**: A card, contains all the information necessary to build a card on the front ned.
+- **Card**: A card, contains all the information necessary to build a card on the front end.
+
+The whole webpack shebang
+-------------------------
+
+I based the whole Django-Webpack integration on [this](http://owaislone.org/blog/webpack-plus-reactjs-and-django/). It works pretty well, but it's pretty weird. Basically, webpack produces a `webpack-stats.json` file in the root, and the Django config reads that file to figure out where to find the file. Locally, that's a separate webpack dev server; on the server, that's a file on S3.
 
 Composer
 --------
