@@ -131,4 +131,15 @@ Models
 ------
 The core app only has two models:
 
-- Category:
+- **Category**: A grouping for cards, i.e. People, Documents, etc.
+- **Card**: A card, contains all the information necessary to build a card on the front ned.
+
+Composer
+--------
+
+The main view in this app is the Card Stack Composer. It presents all published cards in the database and allows users to select and orders the cards they would like to embed in the stack. This is built as a React app, and can be developed in `assets/js/app.js`. 
+
+Screenshots
+-----------
+
+Whenever a card is saved and republished, a screenshot is created [through a Lambda service](https://github.com/nprapps/russia-explainer-serverless-chrome). The request to this service is handled in `core/signals.py`. You can view current screenshots at `/cardbuilder/screenshots/`.
