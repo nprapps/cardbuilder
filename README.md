@@ -20,7 +20,26 @@ cardbuilder
 What is this?
 -------------
 
-**TKTK: Describe cardbuilder here.**
+Cardbuilder is a Django-based application for authoring cards and creating embeddable stacks related to the Russia investigation for use on npr.org. 
+
+What's In Here?
+---------------
+
+- `assets`: Front-end assets for the Django views. These are compiled through Webpack.
+- `config`: Django project configuration
+- `confs`: Server configuration files (nginx, uwsgi, etc)
+- `core`: Django application
+- `data`: Stub folder for output of JSON for cards locally
+- `fabfile`: Fabric commands for server management
+- `webpack`: Webpack configuration
+- `.babelrc`: Configuration for Babel transpilation, used by Webpack
+- `app_config.py`: General application configuration
+- `crontab`: Default crontab, not in use for this app
+- `manage.py`: Default Django management file
+- `package.json`: Node requirements
+- `README.md`: General documentation
+- `requirements.txt`: Python requirements
+- `run_on_server.sh`: Bash file used to run Fabric commands on the server, invoked by `fab servers.fabcast`.
 
 Assumptions
 -----------
