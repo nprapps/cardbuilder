@@ -124,3 +124,9 @@ fab staging master servers.fabcast:deploy
 ```
 
 If any of the commands you run themselves require executing on the server, the server will SSH into itself to run them.
+
+Models
+------
+The core app only has two models:
+
+- Category:

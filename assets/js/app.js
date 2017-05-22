@@ -167,14 +167,19 @@ class Categories extends React.Component {
                     <h1>3. Select your cards</h1>
                 </div>
                 <div className="categories row-interaction">
-                    {Object.keys(DATA).map(key => (
-                        <CardList 
-                            update={this.update}
-                            category={key} 
-                            cards={DATA[key]}
-                            key={key}
-                        />
-                    ))}
+                    {Object.keys(DATA).map(key => {
+                        if (DATA[key].length > 0) {
+                            return (
+                                <CardList 
+                                    update={this.update}
+                                    category={key} 
+                                    cards={DATA[key]}
+                                    key={key}
+                                />
+                            )
+                        }
+
+                    })}
                 </div>
             </div>
         )
