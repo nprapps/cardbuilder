@@ -97,6 +97,8 @@ Then, run `fab staging master servers.setup` to deploy to staging. This will set
 
 Once the server is correctly setup, you can run `fab staging master deploy_server` to checkout the latest from the repo and restart uWSGI. 
 
+Because there are Django views dependent on Webpack builds, if you need to deploy a change to the JavaScript or CSS of a view, run `fab staging master deploy_server:True`. This will both deploy the latest changes to the server and run webpack on the server, sending the latest JS and CSS to S3.
+
 Install web services
 ---------------------
 
