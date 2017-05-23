@@ -5,7 +5,7 @@ from fabric.api import hide, local, settings, shell_env, task
 from fabric.contrib import django
 from fabric.state import env
 from slugify import slugify
-
+from time import sleep
 
 # django setup
 django.settings_module('config.settings')
@@ -45,5 +45,6 @@ def screenshots():
         }
 
         r = requests.get(LAMBDA_URL, params=payload)
-
         print(r.status_code)
+
+        sleep(5)
