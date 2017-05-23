@@ -45,3 +45,5 @@ def screenshots():
         }
 
         r = requests.get(LAMBDA_URL, params=payload)
+
+        print(r.status_code)
