@@ -47,4 +47,4 @@ def screenshots():
         r = requests.get(LAMBDA_URL, params=payload)
         print(r.status_code)
 
-        sleep(5)
+        sleep(30)
