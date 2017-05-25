@@ -91,32 +91,33 @@ def screenshot(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Card)
 def publish_category_json(sender, instance, **kwargs):
-    for category in Category.objects.all():
-        cards = []
 
-        for card in Card.objects.filter(category=category).filter(published=True).filter(copyedited=True):
-            fields = serialize_fields(card)
-            cards.append(fields)
+    cards = []
+    category = instance.category
 
-        DATA_FILE = 'data/{0}.json'.format(category.category_name.lower())
+    for card in Card.objects.filter(category=category).filter(published=True).filter(copyedited=True):
+        fields = serialize_fields(card)
+        cards.append(fields)
 
-        with open(DATA_FILE, 'w') as f:
-            json.dump(cards, f)
+    DATA_FILE = 'data/{0}.json'.format(slugify(category.category_name))
 
-        s3_args = [
-            'aws', 
-            's3', 
-            'cp', 
-            DATA_FILE,
-            's3://{0}/{1}/data/'.format(
-                S3_BUCKET, 
-                app_config.PROJECT_FILENAME
-            ), 
-            '--cache-control', 
-            'max-age=30'
-        ]
+    with open(DATA_FILE, 'w') as f:
+        json.dump(cards, f)
 
-        if DEPLOYMENT_TARGET == 'production':
-            s3_args.extend(['--acl', 'public-read'])
+    s3_args = [
+        'aws', 
+        's3', 
+        'cp', 
+        DATA_FILE,
+        's3://{0}/{1}/data/'.format(
+            S3_BUCKET, 
+            app_config.PROJECT_FILENAME
+        ), 
+        '--cache-control', 
+        'max-age=30'
+    ]
 
-        subprocess.run(s3_args)
+    if DEPLOYMENT_TARGET == 'production':
+        s3_args.extend(['--acl', 'public-read'])
+
+    subprocess.run(s3_args)
