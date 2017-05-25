@@ -91,7 +91,6 @@ def screenshot(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Card)
 def publish_category_json(sender, instance, **kwargs):
-
     cards = []
     category = instance.category
 
