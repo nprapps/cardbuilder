@@ -82,13 +82,6 @@ def screenshot(sender, instance, **kwargs):
     if r.status_code != 200:
         r2 = requests.get(LAMBDA_URL, params=payload)
 
-        if r2.status_code != 200:
-            print('Screenshot for {0} failed'.format(instance.title))
-        else:
-            print('Screenshot for {0} successful'.format(instance.title))
-    else:
-        print('Screenshot for {0} successful'.format(instance.title))
-
 @receiver(post_save, sender=Card)
 def publish_category_json(sender, instance, **kwargs):
     cards = []
