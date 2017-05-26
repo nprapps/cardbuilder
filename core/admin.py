@@ -13,7 +13,7 @@ class AuthorAdmin(admin.ModelAdmin):
 class CardAdminForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ['published', 'copyedited', 'title', 'subtitle', 'lede', 'image', 'image_credit', 'category', 'body', 'production_notes']
+        fields = ['published', 'copyedited', 'title', 'slug', 'subtitle', 'lede', 'image', 'image_credit', 'category', 'body', 'production_notes']
         widgets = {
             'body': RedactorEditor()
         }
@@ -30,7 +30,7 @@ class CardAdminForm(forms.ModelForm):
 
 class CardAdmin(admin.ModelAdmin):
     form = CardAdminForm
-
+    prepopulated_fields = { 'slug': ('title',) }
     list_display = ('title', 'category', 'copyedited', 'published')
 
 admin.site.register(Card, CardAdmin)
