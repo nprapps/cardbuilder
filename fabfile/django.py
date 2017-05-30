@@ -16,5 +16,4 @@ def setup_django():
 
 @task
 def migrate_db():
-    local('python manage.py makemigrations')
     local('python manage.py migrate')
