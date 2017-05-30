@@ -1,63 +1,26 @@
-<html>
-    <head>
-        {% block title %}
-        <title>{{ PROJECT_SLUG }}</title>
-        {% endblock %}
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="description" content="Demo project">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends '_base.html' %}
 
-        <script src="https://apps.npr.org/best-music-2016/js/lib/webfont.js"></script>
-        <script>
-            var urls = [
-                'http://s.npr.org/templates/css/fonts/GothamSSm.css',
-                'http://s.npr.org/templates/css/fonts/Gotham.css',
-                'http://s.npr.org/templates/css/fonts/Knockout.css'
-            ];
-            if (window.location.protocol == "https:") {
-                urls = [
-                    'https://secure.npr.org/templates/css/fonts/GothamSSm.css',
-                    'https://secure.npr.org/templates/css/fonts/Gotham.css',
-                    'https://secure.npr.org/templates/css/fonts/Knockout.css'
-                ];
-            }
-            WebFont.load({
-                 custom: {
-                     families: [
-                         'Gotham SSm:n4,n7',
-                         'Gotham:n4,n7',
-                         'Knockout 31 4r:n4'
-                     ],
-                     urls: urls
-                 },
-                 timeout: 10000
-            });
-        </script>
-        <style>
-            .card {
-                width: 50%;
-                float: left;
-                box-sizing: border-box;
-                border: 1px solid #ccc;
-            }
-            .card img {
-                width: 100%;
-                height: auto;
-                padding: 30px;
-                box-sizing: border-box;
-            }
-        </style>
+{% block extra_header %}
+<style>
+    .card {
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+    }
+    .card img {
+        width: 100%;
+        height: auto;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+</style>
+{% endblock %}
 
-        {% block extra_header %}
-        {% endblock %}
-    </head>
-    <body>
-    {% for card in cards %}
-        <div class="card">
-            <img src="https://s3.amazonaws.com/apps.npr.org/cardbuilder/screenshots/russian-explainer-{{ card.title|slugify }}-id-{{ card.id }}.png">
-        </div>
-    {% endfor %}
-
-    </body>
-</html>
+{% block content %}
+{% for card in cards %}
+    <div class="card">
+        <img src="https://s3.amazonaws.com/apps.npr.org/cardbuilder/screenshots/russian-explainer-{{ card.title|slugify }}-id-{{ card.id }}.png">
+    </div>
+{% endfor %}
+{% endblock %}

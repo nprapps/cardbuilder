@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-{% load render_bundle from webpack_loader %}
 <html>
     <head>
         {% block title %}
@@ -45,10 +44,7 @@
         {% block content %}
         {% endblock %}
 
-        <script src="https://pym.nprapps.org/pym.v1.min.js"></script>
-
         {% block js %}
-        {% render_bundle 'main' %}
         {% endblock %}
         
         {% block extra_footer %}

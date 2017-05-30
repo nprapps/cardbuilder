@@ -35,6 +35,12 @@ def screenshots(request):
 
     return render(request, 'screenshots.html', context)
 
+def deep_links(request):
+    context = build_context()
+    cards = Card.objects.filter(published=True).filter(copyedited=True).order_by('id')
+    context['cards'] = cards
+
+    return render(request, 'deep-links.html', context)
 
 def build_context():
     config = {}

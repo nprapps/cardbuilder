@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load render_bundle from webpack_loader %}
 
 {% block content %}
 
@@ -15,4 +16,9 @@
     var DATA = {{ grouped_cards|safe }};
     var DEPLOYMENT_TARGET = '{{ DEPLOYMENT_TARGET }}'
 </script>
+{% endblock %}
+
+{% block js %}
+<script src="https://pym.nprapps.org/pym.v1.min.js"></script>
+{% render_bundle 'main' %}
 {% endblock %}

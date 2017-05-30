@@ -39,6 +39,8 @@ DEFAULT_MAX_AGE = 20
 PRODUCTION_SERVERS = ['54.211.90.44']
 STAGING_SERVERS = ['54.210.206.115']
 
+SEAMUS_URL = 'http://npr.org'
+
 # Should code be deployed to the web/cron servers?
 DEPLOY_TO_SERVERS = True
 

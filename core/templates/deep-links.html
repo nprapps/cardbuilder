@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+
+{% block extra_header %}
+<style>
+ul {
+    list-style: none;
+    padding: 0;
+}
+ul li {
+    padding: 0;
+    margin: 0 0 15px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<ul>
+    {% for card in cards %}
+        <li><strong>{{ card.title }}:</strong> <a href="{{ SEAMUS_URL }}/?card={{ card.slug }}&category={{ card.category }}">{{ SEAMUS_URL }}/?card={{ card.slug }}&category={{ card.category.slug }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

@@ -6,6 +6,7 @@ from redactor.widgets import RedactorEditor
 
 class CategoryAdmin(admin.ModelAdmin):
     ordering = ('category_name',)
+    prepopulated_fields = { 'slug': ('category_name',) }
 
 class AuthorAdmin(admin.ModelAdmin):
     ordering = ('first_name',)

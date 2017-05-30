@@ -2,6 +2,7 @@ from django.db import models
 
 class Category(models.Model):
     category_name = models.CharField(max_length=40)
+    slug = models.SlugField(max_length=40, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'categories'
