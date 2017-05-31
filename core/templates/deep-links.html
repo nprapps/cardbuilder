@@ -16,7 +16,7 @@ ul li {
 {% block content %}
 <ul>
     {% for card in cards %}
-        <li><strong>{{ card.title }}:</strong> <a href="{{ SEAMUS_URL }}/?card={{ card.slug }}&category={{ card.category }}">{{ SEAMUS_URL }}/?card={{ card.slug }}&category={{ card.category.slug }}</a></li>
+        <li><strong>{{ card.title }}:</strong> <a href="{{ SEAMUS_URL }}&card={{ card.slug }}&category={{ card.category.slug }}">{{ SEAMUS_URL }}/?card={{ card.slug }}&category={{ card.category.slug }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
