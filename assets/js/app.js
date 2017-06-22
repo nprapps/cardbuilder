@@ -34,7 +34,7 @@ class App extends React.Component {
         let newSelections = this.state.selections.slice()
 
         if (action) {
-            newSelections.push(selection)        
+            newSelections.push(selection)
         } else {
             const i = newSelections.indexOf(selection)
             newSelections.splice(i, 1)
@@ -81,7 +81,7 @@ class App extends React.Component {
                 <Subtitle update={this.updateSubtitle} key="Subtitle"></Subtitle>
                 <Categories update={this.updateSelections} key="Categories" />
                 <SelectionList selections={this.state.selections} update={this.updateOrder} key="SelectionList" />
-                
+
                 { this.state.selections.length > 0 && this.state.title.length > 0 && this.state.subtitle.length > 0 ? <Embed ids={this.state.ids} title={this.state.title} subtitle={this.state.subtitle} key="Embed" /> : null }
                 { this.state.selections.length > 0 && this.state.title.length > 0 && this.state.subtitle.length > 0 ? <EmbedCode ids={this.state.ids} title={this.state.title} subtitle={this.state.subtitle} key="EmbedCode" /> : null }
             </div>
@@ -170,9 +170,9 @@ class Categories extends React.Component {
                     {Object.keys(DATA).map(key => {
                         if (DATA[key].length > 0) {
                             return (
-                                <CardList 
+                                <CardList
                                     update={this.update}
-                                    category={key} 
+                                    category={key}
                                     cards={DATA[key]}
                                     key={key}
                                 />
@@ -231,10 +231,10 @@ class Card extends React.Component {
         return(
             <div className="card" id={this.props.card.id}>
                 <p>
-                        <input 
+                        <input
                             id={this.props.card.title}
-                            name={this.props.card.title} 
-                            type="checkbox" 
+                            name={this.props.card.title}
+                            type="checkbox"
                             checked={this.state.checked}
                             onClick={this.toggle}
                         />
@@ -272,14 +272,14 @@ class SelectionList extends React.Component {
 }
 
 
-const SortableItem = SortableElement(({value}) => 
+const SortableItem = SortableElement(({value}) =>
     <li>{value.title}</li>
 );
 
 const SortableList = SortableContainer(({selections}) => {
   return (
     <div className="selections">
-        { selections.length > 0 ? 
+        { selections.length > 0 ?
             <ol>
               {selections.map((value, index) => (
                 <SortableItem key={`item-${index}`} index={index} value={value} />
@@ -287,7 +287,7 @@ const SortableList = SortableContainer(({selections}) => {
             </ol> :
             'Select a card!'
         }
-        
+
     </div>
   );
 });
@@ -307,13 +307,13 @@ class Embed extends React.Component {
 
     initEmbed() {
         new pym.Parent(
-            'card-embed', 
-            `${BASE_GRAPHIC_URL}?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}`, 
+            'card-embed',
+            `${BASE_GRAPHIC_URL}?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}`,
             {}
         )
     }
 
-    render() {        
+    render() {
         return (
             <div className="row embed-wrapper">
                 <div className="row-label">
@@ -334,36 +334,8 @@ class EmbedCode extends React.Component {
 
     embedCode() {
         console.log(this.props.ids);
-        return `<div id="responsive-embed-russia-cards"></div>
-<script type=text/javascript>
-    (function(jQuery) {
-        if (typeof jQuery !== 'undefined' && typeof jQuery.getScript === 'function') {
-            // add randomness to id to support for multiple graphic instances in one story
-            var el = document.getElementById("responsive-embed-russia-cards");
-            el.id = el.id + "-" + Math.random().toString(36).substr(2,5);
-            jQuery.getScript("https://pym.nprapps.org/pym.v1.min.js").done(function () {
-                jQuery(function () { // Wait for page load
-                    var pymParent = new pym.Parent(
-                        el.id,
-                        '${BASE_GRAPHIC_URL}?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}',
-                        {}
-                    );
-                    jQuery.getScript("https://carebot.nprapps.org/carebot-tracker.v0.min.js").done(function () {
-                        var tracker = new CarebotTracker.VisibilityTracker(el.id, function(result) {
-                            // Ignore Carebot events to empty embeds, keeps listening after unloading the page
-                            if (pymParent.el.getElementsByTagName('iframe').length !== 0) {
-                                pymParent.sendMessage('on-screen', result.bucket);
-                            }
-                        });
-                    });
-
-                });
-            });
-        } else {
-            console.error('could not load graphic: jQuery is not on the page.');
-        }
-    })(window.jQuery);
-</script>`
+        return `<p data-pym-src='${BASE_GRAPHIC_URL}?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}'>Loading...</p>
+<script src="https://pym.nprapps.org/npr-pym-tracker-loader.v1.min.js" type="text/javascript"></script>`
     }
 
     render() {
