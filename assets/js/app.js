@@ -335,7 +335,7 @@ class EmbedCode extends React.Component {
     embedCode() {
         console.log(this.props.ids);
         const composedId = 'cardbuilder-' + (this.props.ids).replace(',','-');
-        return `<p data-pym-loader id="cardbuilder-${composedId}" data-child-src='${BASE_GRAPHIC_URL}?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}'>Loading...</p>
+        return `<p data-pym-loader id="${composedId}" data-child-src='${BASE_GRAPHIC_URL}?ids=${escape(this.props.ids)}&title=${escape(this.props.title)}&subtitle=${escape(this.props.subtitle)}'>Loading...</p>
 <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js" type="text/javascript"></script>`
     }
 
