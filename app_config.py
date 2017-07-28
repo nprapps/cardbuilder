@@ -39,7 +39,7 @@ DEFAULT_MAX_AGE = 20
 PRODUCTION_SERVERS = ['54.211.90.44']
 STAGING_SERVERS = ['54.210.206.115']
 
-SEAMUS_URL = 'https://www.npr.org/templates/story/story.php?storyId=526417478'
+SEAMUS_URL = 'http://www.npr.org/2017/06/02/526417478/the-trump-russia-comey-imbroglio-it-s-complicated'
 
 # Should code be deployed to the web/cron servers?
 DEPLOY_TO_SERVERS = True
