@@ -5,12 +5,12 @@ import requests
 import subprocess
 
 from django.core import serializers
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
-from .models import Card, Category
+from .models import Card, Category, Theme
 from slugify import slugify
 
-    
+
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
 if DEPLOYMENT_TARGET == 'production':
@@ -27,20 +27,20 @@ def publish_json(sender, instance, **kwargs):
     fields = serialize_fields(instance)
 
     DATA_FILE = 'data/{0}.json'.format(instance.id)
-    
+
     with open(DATA_FILE, 'w') as f:
         json.dump(fields, f)
 
     s3_args = [
-        'aws', 
-        's3', 
-        'cp', 
+        'aws',
+        's3',
+        'cp',
         DATA_FILE,
         's3://{0}/{1}/data/'.format(
-            S3_BUCKET, 
+            S3_BUCKET,
             app_config.PROJECT_FILENAME
-        ), 
-        '--cache-control', 
+        ),
+        '--cache-control',
         'max-age=30'
     ]
 
@@ -61,6 +61,15 @@ def serialize_fields(instance):
     category_json = json_serializer.serialize([category_obj])
     category_dict = json.loads(category_json)
     fields['category'] = category_dict[0]['fields']['category_name']
+
+    themes = fields['themes']
+    themes_serialized = []
+    for theme in themes:
+        theme_obj = Theme.objects.get(pk=theme)
+        theme_json = json_serializer.serialize([theme_obj])
+        theme_dict = json.loads(theme_json)
+        themes_serialized.append(theme_dict[0]['fields']['theme_name'])
+    fields['themes'] = themes_serialized
 
     return fields
 
@@ -97,15 +106,15 @@ def publish_category_json(sender, instance, **kwargs):
         json.dump(cards, f)
 
     s3_args = [
-        'aws', 
-        's3', 
-        'cp', 
+        'aws',
+        's3',
+        'cp',
         DATA_FILE,
         's3://{0}/{1}/data/'.format(
-            S3_BUCKET, 
+            S3_BUCKET,
             app_config.PROJECT_FILENAME
-        ), 
-        '--cache-control', 
+        ),
+        '--cache-control',
         'max-age=30'
     ]
 
@@ -113,3 +122,44 @@ def publish_category_json(sender, instance, **kwargs):
         s3_args.extend(['--acl', 'public-read'])
 
     subprocess.run(s3_args)
+
+@receiver(m2m_changed, sender=Card.themes.through)
+def publish_theme_json(sender, instance, **kwargs):
+    """
+    publish theme json each time a card updates the relationship
+    """
+    if kwargs['action'] not in ('post_add', 'post_clear', 'post_remove'):
+        return
+    pk_set = kwargs.pop('pk_set', None)
+    model = kwargs.pop('model', None)
+    if pk_set:
+        themes = model.objects.filter(pk__in=pk_set)
+        for theme in themes:
+            DATA_FILE = 'data/{0}.json'.format(slugify(theme.theme_name))
+            cards = []
+            for card in theme.card_set.filter(published=True).filter(copyedited=True):
+                fields = serialize_fields(card)
+                cards.append(fields)
+            with open(DATA_FILE, 'w') as f:
+                json.dump(cards, f)
+            s3_args = [
+                'aws',
+                's3',
+                'cp',
+                DATA_FILE,
+                's3://{0}/{1}/data/'.format(
+                    S3_BUCKET,
+                    app_config.PROJECT_FILENAME
+                ),
+                '--cache-control',
+                'max-age=30'
+            ]
+
+            if DEPLOYMENT_TARGET == 'production':
+                s3_args.extend(['--acl', 'public-read'])
+
+            subprocess.run(s3_args)
+
+    # Update affected cards and category json files to reflect actual included themes
+    publish_json(None, instance)
+    publish_category_json(None, instance)

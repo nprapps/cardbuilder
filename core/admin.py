@@ -1,8 +1,13 @@
-from .models import Card, Category
+from .models import Category, Card, Theme
 from django import forms
 from django.contrib import admin
 from django.utils.html import escape
 from redactor.widgets import RedactorEditor
+
+
+class ThemeAdmin(admin.ModelAdmin):
+    ordering = ('theme_name',)
+    prepopulated_fields = { 'slug': ('theme_name',) }
 
 class CategoryAdmin(admin.ModelAdmin):
     ordering = ('category_name',)
@@ -14,7 +19,7 @@ class AuthorAdmin(admin.ModelAdmin):
 class CardAdminForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ['published', 'copyedited', 'title', 'slug', 'subtitle', 'lede', 'image', 'image_credit', 'category', 'body', 'production_notes']
+        fields = ['published', 'copyedited', 'title', 'slug', 'subtitle', 'lede', 'image', 'image_credit', 'category', 'themes', 'body', 'production_notes']
         widgets = {
             'body': RedactorEditor()
         }
@@ -33,6 +38,8 @@ class CardAdmin(admin.ModelAdmin):
     form = CardAdminForm
     prepopulated_fields = { 'slug': ('title',) }
     list_display = ('title', 'category', 'copyedited', 'published')
+    filter_horizontal = ('themes',)
 
 admin.site.register(Card, CardAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Theme, ThemeAdmin)

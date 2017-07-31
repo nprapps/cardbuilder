@@ -11,6 +11,14 @@ class Category(models.Model):
         return self.category_name
 
 
+class Theme(models.Model):
+    theme_name = models.CharField(max_length=40)
+    slug = models.SlugField(max_length=40, null=True, blank=True)
+
+    def __str__(self):
+        return self.theme_name
+
+
 class Card(models.Model):
     published = models.BooleanField(default=False)
     copyedited = models.BooleanField(default=False)
@@ -23,6 +31,7 @@ class Card(models.Model):
     image_credit = models.CharField(max_length=140, null=True, blank=True)
     production_notes = models.TextField(null=True, blank=True)
     category = models.ForeignKey(Category)
+    themes = models.ManyToManyField(Theme, blank=True)
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
